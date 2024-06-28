@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "csv-loader": "^3.0.5",
-    "init": "^0.1.2"
+    "date-fns": "^3.6.0",
+    "init": "^0.1.2",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.4.0",
