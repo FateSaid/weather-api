@@ -10,6 +10,7 @@ async function fetching(web, dom, threeCast) {
         item.day.condition.icon,
         item.day.condition.text
       );
+      obj.name = data.location.name;
       array.push(obj);
     });
     threeCast(array, data.location.name);
