@@ -1,7 +1,7 @@
 import "./style.css";
 import { fetching } from "./logic.js";
 import Sun from "./sunny.jpg";
-import { add, format } from "date-fns";
+import { format } from "date-fns";
 
 const body = document.querySelector("body");
 body.style.backgroundImage = `url(${Sun}`;
@@ -61,6 +61,9 @@ function createDom(
   windDir,
   cloud
 ) {
+  if (document.querySelector(".weather-content") !== null) {
+    document.querySelector(".weather-content").remove();
+  }
   const container = document.querySelector(".container");
   const theCity = document.createElement("h2");
   theCity.classList.add("city");
