@@ -8,26 +8,31 @@ async function fetching(web, dom, threeCast) {
       const obj = Forecast(
         item.day.avgtemp_c,
         item.day.condition.icon,
-        item.day.condition.text
+        item.day.condition.text,
+        item.date
       );
       obj.name = data.location.name;
       array.push(obj);
     });
-    threeCast(array, data.location.name);
+    threeCast(array);
     dom(
       data.current.condition.icon,
       data.current.condition.text,
       data.location.name,
       data.location.country,
-      data.current.temp_c
+      data.current.temp_c,
+      data.current.humidity,
+      data.current.wind_degree,
+      data.current.wind_dir,
+      data.current.cloud
     );
   } catch (error) {
     console.error(`Catch error : ${error}`);
   }
 }
 
-function Forecast(avgtemp, icon, text) {
-  return { avgtemp, icon, text };
+function Forecast(avgtemp, icon, text, date) {
+  return { avgtemp, icon, text, date };
 }
 
 export { fetching };

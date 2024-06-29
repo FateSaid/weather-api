@@ -1,17 +1,12 @@
 import "./style.css";
 import { fetching } from "./logic.js";
 import Sun from "./sunny.jpg";
-import { format } from "date-fns";
+import { add, format } from "date-fns";
 
 const body = document.querySelector("body");
 body.style.backgroundImage = `url(${Sun}`;
 
-function addWeatherDetail() {
-  const sideContent = document.querySelector(".side-content");
-  const weatherDetail = document.createElement("div");
-}
-
-function addForecast(array, city) {
+function addForecast(array) {
   const sideContent = document.querySelector(".side-content");
   if (document.querySelector(".forecast-container") !== null) {
     document.querySelector(".forecast-container").remove();
@@ -20,31 +15,52 @@ function addForecast(array, city) {
   forecastContainer.classList.add("forecast-container");
 
   array.forEach((obj) => {
+    const forecastBox = document.createElement("div");
+    forecastBox.classList.add("forecast-box");
     const forecast = document.createElement("div");
     forecast.classList.add("forecast");
     const tempC = document.createElement("div");
     tempC.classList.add("forecast-avgtemp-c");
-    const name = document.createElement("div");
-    name.classList.add("forecast-name");
+
     const icon = document.createElement("div");
     icon.classList.add("forecast-icon");
 
+    const text = document.createElement("div");
+    text.classList.add("forecast-text");
+    text.textContent = obj.text;
+
+    const date = document.createElement("div");
+    date.classList.add("date");
+    date.textContent = format(new Date(obj.date), "eeee");
+    forecastBox.appendChild(date);
+
     tempC.textContent = obj.avgtemp;
-    name.textContent = city;
+
     const pic = new Image();
     pic.src = obj.icon;
     icon.appendChild(pic);
+    icon.appendChild(text);
 
     forecast.appendChild(tempC);
-    forecast.appendChild(name);
-    forecast.appendChild(icon);
-    forecastContainer.appendChild(forecast);
-  });
 
+    forecast.appendChild(icon);
+    forecastBox.appendChild(forecast);
+    forecastContainer.appendChild(forecastBox);
+  });
   sideContent.appendChild(forecastContainer);
 }
 
-function createDom(icon, text, city, country, tempC) {
+function createDom(
+  icon,
+  text,
+  city,
+  country,
+  tempC,
+  humidity,
+  windDegree,
+  windDir,
+  cloud
+) {
   const container = document.querySelector(".container");
   const theCity = document.createElement("h2");
   theCity.classList.add("city");
@@ -81,6 +97,35 @@ function createDom(icon, text, city, country, tempC) {
   p.classList.add("condition");
   p.textContent = text;
   picDiv.appendChild(p);
+
+  const weatherDetail = document.createElement("div");
+  weatherDetail.classList.add("weather-content");
+
+  // humidity
+
+  const humidDiv = document.createElement("div");
+  humidDiv.classList.add("weather-humidity");
+  humidDiv.textContent = `Humidity: ${humidity}`;
+
+  const windDegDiv = document.createElement("div");
+  windDegDiv.classList.add("weather-wind-degree");
+  windDegDiv.textContent = `Wind Degree: ${windDegree}`;
+
+  const windDirDiv = document.createElement("div");
+  windDirDiv.classList.add("weather-wind-direction");
+  windDirDiv.textContent = `Wind Direction: ${windDir}`;
+
+  const cloudDiv = document.createElement("div");
+  cloudDiv.classList.add("weather-cloud");
+  cloudDiv.textContent = `Cloud: ${cloud}`;
+
+  weatherDetail.appendChild(humidDiv);
+  weatherDetail.appendChild(windDegDiv);
+  weatherDetail.appendChild(windDirDiv);
+  weatherDetail.appendChild(cloudDiv);
+
+  const weatherContainer = document.querySelector(".weather-detail");
+  weatherContainer.appendChild(weatherDetail);
 
   container.appendChild(info);
   container.appendChild(location);
