@@ -6,6 +6,7 @@ import Night from "./night.jpg";
 import { format } from "date-fns";
 
 const body = document.querySelector("body");
+body.style.backgroundColor = "lightblue";
 
 function addForecast(array) {
   const sideContent = document.querySelector(".side-content");
@@ -52,8 +53,6 @@ function addForecast(array) {
 }
 
 function checkWeather(isDay, text) {
-  const title = document.querySelector(".title");
-  const content = document.querySelector(".content");
   const weather = text.split(" ");
   if (isDay === 0 || weather.includes("sunny") || weather.includes("Sunny")) {
     body.style.backgroundImage = `url(${Night})`;
@@ -66,7 +65,7 @@ function checkWeather(isDay, text) {
       weather.includes("cloudy"))
   ) {
     body.style.backgroundImage = `url(${Sun}`;
-    body.style.color = "white";
+    body.style.color = "black";
   } else if (weather.includes("Rain") || weather.includes("rain")) {
     body.style.backgroundImage = `url(${Rain})`;
     body.style.color = "white";
