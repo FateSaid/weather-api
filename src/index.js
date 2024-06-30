@@ -1,10 +1,11 @@
 import "./style.css";
 import { fetching } from "./logic.js";
 import Sun from "./sunny.jpg";
+import Rain from "./raining.jpg";
+import Night from "./night.jpg";
 import { format } from "date-fns";
 
 const body = document.querySelector("body");
-body.style.backgroundImage = `url(${Sun}`;
 
 function addForecast(array) {
   const sideContent = document.querySelector(".side-content");
@@ -50,6 +51,28 @@ function addForecast(array) {
   sideContent.appendChild(forecastContainer);
 }
 
+function checkWeather(isDay, text) {
+  const title = document.querySelector(".title");
+  const content = document.querySelector(".content");
+  const weather = text.split(" ");
+  if (isDay === 0 || weather.includes("sunny") || weather.includes("Sunny")) {
+    body.style.backgroundImage = `url(${Night})`;
+    body.style.color = "white";
+  } else if (
+    isDay === 1 &&
+    (weather.includes("Sunny") ||
+      weather.includes("Cloudy") ||
+      weather.includes("sunny") ||
+      weather.includes("cloudy"))
+  ) {
+    body.style.backgroundImage = `url(${Sun}`;
+    body.style.color = "white";
+  } else if (weather.includes("Rain") || weather.includes("rain")) {
+    body.style.backgroundImage = `url(${Rain})`;
+    body.style.color = "white";
+  }
+}
+
 function createDom(
   icon,
   text,
@@ -59,8 +82,10 @@ function createDom(
   humidity,
   windDegree,
   windDir,
-  cloud
+  cloud,
+  isDay
 ) {
+  checkWeather(isDay, text);
   if (document.querySelector(".weather-content") !== null) {
     document.querySelector(".weather-content").remove();
   }
