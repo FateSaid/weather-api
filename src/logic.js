@@ -37,4 +37,3 @@ function Forecast(avgtemp, icon, text, date) {
 }
 
 export { fetching };
-``;
