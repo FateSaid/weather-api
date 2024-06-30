@@ -24,7 +24,8 @@ async function fetching(web, dom, threeCast) {
       data.current.humidity,
       data.current.wind_degree,
       data.current.wind_dir,
-      data.current.cloud
+      data.current.cloud,
+      data.current.is_day
     );
   } catch (error) {
     console.error(`Catch error : ${error}`);
