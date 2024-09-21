@@ -54,20 +54,14 @@ function addForecast(array) {
 
 function checkWeather(isDay, text) {
   const weather = text.split(" ");
-  if (isDay === 0 || weather.includes("sunny") || weather.includes("Sunny")) {
-    body.style.backgroundImage = `url(${Night})`;
-    body.style.color = "white";
-  } else if (
-    isDay === 1 &&
-    (weather.includes("Sunny") ||
-      weather.includes("Cloudy") ||
-      weather.includes("sunny") ||
-      weather.includes("cloudy"))
-  ) {
-    body.style.backgroundImage = `url(${Sun}`;
+  if (isDay === 1 || weather.includes("sunny") || weather.includes("Sunny")) {
+    body.style.backgroundImage = `url(${Sun})`;
     body.style.color = "black";
   } else if (weather.includes("Rain") || weather.includes("rain")) {
     body.style.backgroundImage = `url(${Rain})`;
+    body.style.color = "white";
+  } else if (isDay === 0) {
+    body.style.backgroundImage = `url(${Night}`;
     body.style.color = "white";
   }
 }
