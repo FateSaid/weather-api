@@ -154,7 +154,7 @@ function createDom(
 }
 
 function deleteSearch(search) {
-  const address = `https://api.weatherapi.com/v1/forecast.json?key=5572d6b5506540f1a26101902242406&&days=3&q=${search}`;
+  const address = `https://api.weatherapi.com/v1/forecast.json?key=1c694c04738a49399d4130359242109&&days=3&q=${search}`;
   fetching(address, createDom, addForecast);
 }
 
